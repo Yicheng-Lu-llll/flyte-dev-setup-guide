@@ -144,6 +144,31 @@ sudo make compile
 flyte start --config flyte_local.yaml
 ```
 
+8. After finish developing, we can teardown the k3s cluster.
+```shell
+flytectl demo teardown
+# context removed for "flyte-sandbox".
+# 🧹 🧹 Sandbox cluster is removed successfully.
+# ❇️ Run the following command to unset sandbox environment variables for accessing flytectl
+#        unset FLYTECTL_CONFIG 
+```
+
+
+## How to set dev environment for flytekit?
+
+1. If you also change the code for flyteidl, flyteadmin, flyteplugins or flytepropeller, you can refer to the `How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?` to build the backends.
+If not, We can simply run `flytectl demo start`
+
+```shell
+virtualenv ~/.virtualenvs/flytekit
+source ~/.virtualenvs/flytekit/bin/activate
+make setup
+pip install -e .
+pip install gsutil awscli
+cd plugins
+pip install -e .
+```
+
 
 
 ## How to set dev environment for flyteconsole?
@@ -157,22 +182,6 @@ export ADMIN_API_URL=http://localhost:30081
 export DISABLE_AUTH=1
 export ADMIN_API_USE_SSL="http"
 ```
-
-
-
-## How to set dev environment for flytekit?
-
-
-```shell
-virtualenv ~/.virtualenvs/flytekit
-source ~/.virtualenvs/flytekit/bin/activate
-make setup
-pip install -e .
-pip install gsutil awscli
-cd plugins
-pip install -e .
-```
-
 
 
 
