@@ -83,6 +83,7 @@ git clone https://github.com/flyteorg/flyte.git
 cd flyte
 
 # Step2: build a Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server.
+The version of flyteidl, flyteadmin, flyteplugins and flytepropeller you used to build Single binary is defined in `go.mod`.
 sudo apt-get -y install jq # You may need to install jq
 go mod tidy
 sudo make compile
@@ -94,9 +95,25 @@ flyte start --config flyte_local.yaml
 
 6. [Optional] Now, you are able to access Flyte UI:http://localhost:30080/console.
    
-7. Previously, we build Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server. now let's replace with you own code.
-```
-# Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins or flytepropeller.
+7. Previously, we build Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server, now let's replace with you own code.
+```shell
+# Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins or flytepropeller. 
+
+# Step1.2: If you change flyteidl/flyteadmin/flyteplugins/flytepropeller, under flyteidl/flyteadmin/flyteplugins/flytepropeller folder, before building the Single binary, You should run:
+
+# flyteidl/flyteadmin/flyteplugins/flytepropeller uses go1.19, so make sure you use switch to go1.19.
+export PATH=$PATH:$(go env GOPATH)/bin
+go install golang.org/dl/go1.19@latest
+go1.19 download
+export GOROOT=$(go1.19 env GOROOT)
+export PATH="$GOROOT/bin:$PATH"
+
+make lint
+make generate
+make test_unit
+
+
+
 
 
 # Step2: Under Flyte folder, Run `go mod edit -replace`. This will replace with you own code. 
