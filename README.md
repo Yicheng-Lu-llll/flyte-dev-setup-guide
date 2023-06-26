@@ -49,9 +49,27 @@ export PATH=$PATH:/home/ubuntu/bin # replace with your path
 [minio](https://min.io/) is a S3 compatible object store that will later be used to store task output, input etc.
 [postgres](https://www.postgresql.org/) is am open source object-relational database that will later be used by flyteadmin to store all flyte infomation.
 ```shell
+# Step1: start k3 scluster, create pod for postgres, minio.
 flytectl demo start --dev
+# 👨‍💻 Flyte is ready! Flyte UI is available at http://localhost:30080/console 🚀 🚀 🎉 
+# ❇️ Run the following command to export demo environment variables for accessing flytectl
+#         export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml 
+# 🐋 Flyte sandbox ships with a Docker registry. Tag and push custom workflow images to localhost:30000
+# 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
 
-kubectl get pod -n flyte
+# Step2: export FLYTECTL_CONFIG as previous log indicated.
+```
+export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml 
+```
+# Step3: kubeconfig will be auto copied to the user's main kubeconfig(default is `~/.kube/config`) with "flyte-sandbox" as the context name.
+Check we can access K3s cluster. Check the postgres and minio is running.
+# kubectl get pod -n flyte
+# NAME                                                  READY   STATUS    RESTARTS   AGE
+# flyte-sandbox-docker-registry-85745c899d-dns8q        1/1     Running   0          5m
+# flyte-sandbox-kubernetes-dashboard-6757db879c-wl4wd   1/1     Running   0          5m
+# flyte-sandbox-proxy-d95874857-2wc5n                   1/1     Running   0          5m
+# flyte-sandbox-minio-645c8ddf7c-sp6cc                  1/1     Running   0          5m
+# flyte-sandbox-postgresql-0                            1/1     Running   0          5m
 ```
 
 3. download flyte repo and cd to the repo
