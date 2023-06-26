@@ -15,6 +15,7 @@ So, let's embark on this journey together, easing your transition into the world
 
 - This guide is used and tested on AWS EC2 with ubuntu 22.04 image.
 - Docker
+- Kubectl
 
 ## Content
 - How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
@@ -32,14 +33,21 @@ So, let's embark on this journey together, easing your transition into the world
 
 ## How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
 
-1. install Flytectl
+1. install [Flytectl](https://github.com/flyteorg/flytectl). It is a portable and lightweight command-line interface to work with Flyte.
 ```shell
+# Step1: install the latest version of Flytectl
 curl -sL https://ctl.flyte.org/install | bash
+# flyteorg/flytectl info checking GitHub for latest tag
+# flyteorg/flytectl info found version: 0.6.39 for v0.6.39/Linux/x86_64
+# flyteorg/flytectl info installed ./bin/flytectl
+
+# Step2: export Flytectl path baseed on previous log "flyteorg/flytectl info installed ./bin/flytectl"
+export PATH=$PATH:/home/ubuntu/bin # replace with your path
 ```
 
 2. Build an k3s cluster that runs minio and postgres pod.
-minio is used to simulate AWS S3 that will later used to stroe task output, input etc.
-postgres is used by flyteadmin to store all flyte infomation.
+[minio](https://min.io/) is a S3 compatible object store that will later be used to store task output, input etc.
+[postgres](https://www.postgresql.org/) is am open source object-relational database that will later be used by flyteadmin to store all flyte infomation.
 ```shell
 flytectl demo start --dev
 
@@ -58,6 +66,7 @@ go mod tidy
 sudo make compile
 flyte start --config flyte_local.yaml
 ```
+https://github.com/flyteorg/flytectl/pull/370
 
 5. replace with your own code
 ```shell
