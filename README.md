@@ -72,161 +72,51 @@ Check we can access K3s cluster. Check the postgres and minio is running.
 # flyte-sandbox-postgresql-0                            1/1     Running   0          5m
 ```
 
-3. [Optional] Access Minio console via `http://localhost:30080/minio/login`. The default 
-  
-
-
-
-3. download flyte repo and cd to the repo
+3. [Optional] Access Minio console via `http://localhost:30080/minio/login`.
+The default Username is `minio`, the default Password is `miniostorage`.
+Later, when developing, You amy need to look at the input.pb, output.pb or deck.html in the Minio.
+ 
+5. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
 ```shell
+# Step1: download flyte
 git clone https://github.com/flyteorg/flyte.git
 cd flyte
+
+# Step2: build a Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server.
+sudo apt-get -y install jq # You may need to install jq
+go mod tidy
+sudo make compile
+
+# Step3: Running the Single binary. flyte_local.yaml is the config file. It is write to fit with the all you previous built. So, you do not need to change the flyte_local.yaml.
+flyte start --config flyte_local.yaml
+# All logs from flyteadmin, flyteplugins, flytepropeller ... will appear in the terminal
 ```
 
-4. Now we will build a Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server.
-```shell
-sudo apt-get -y install jq
+6. [Optional] Now, you are able to access Flyte UI:http://localhost:30080/console.
+   
+7. Previously, we build Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server. now let's replace with you own code.
+```
+# Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins or flytepropeller.
+
+
+# Step2: Under Flyte folder, Run `go mod edit -replace`. This will replace with you own code. 
+go mod edit -replace github.com/flyteorg/flyteadmin=/home/ubuntu/flyteadmin #replace with your own local path to flyteadmin
+go mod edit -replace github.com/flyteorg/flytepropeller=/home/ubuntu/flytepropeller #replace with your own local path to flytepropeller
+go mod edit -replace github.com/flyteorg/flyteidl=/home/ubuntu/flyteidl #replace with your own local path to flyteidl
+go mod edit -replace github.com/flyteorg/flyteplugins=/home/ubuntu/flyteplugins # replace with your own local path to flyteplugins
+
+# Step3: Rebuild and rerun the Single binary: 
 go mod tidy
 sudo make compile
 flyte start --config flyte_local.yaml
-```
-https://github.com/flyteorg/flytectl/pull/370
-
-```shell
-# This is a sample configuration file.
-# Real configuration when running inside K8s (local or otherwise) lives in a ConfigMap
-# Look in the artifacts directory in the flyte repo for what's actually run
-# https://github.com/lyft/flyte/blob/b47565c9998cde32b0b5f995981e3f3c990fa7cd/artifacts/flyteadmin.yaml#L72
-# Flyte clusters can be run locally with this configuration
-# flytectl demo start --dev
-# flyte start --config flyte_local.yaml
-propeller:
-  rawoutput-prefix: "s3://my-s3-bucket/test/"
-  kube-config: "/root/.kube/config"
-  create-flyteworkflow-crd: true
-webhook:
-  certDir: /tmp/k8s-webhook-server/serving-certs
-  serviceName: flyte-pod-webhook
-  localCert: true
-  servicePort: 9443
-tasks:
-  task-plugins:
-    enabled-plugins:
-      - container
-      - sidecar
-      - K8S-ARRAY
-    default-for-task-types:
-      - container: container
-      - container_array: K8S-ARRAY
-server:
-  kube-config: "/root/.kube/config"
-  httpPort: 30080
-  serviceHttpEndpoint: http://localhost:30080/
-  grpc:
-    port: 30081
-flyteadmin:
-  runScheduler: false
-database:
-  postgres:
-    port: 30001
-    username: postgres
-    password: postgres
-    host: localhost
-    dbname: flyteadmin
-    options: "sslmode=disable"
-storage:
-  type: minio
-  connection:
-    access-key: minio
-    auth-type: accesskey
-    secret-key: miniostorage
-    disable-ssl: true
-    endpoint: "http://localhost:30002"
-    region: my-region
-  cache:
-    max_size_mbs: 10
-    target_gc_percent: 100
-  container: "my-s3-bucket"
-Logger:
-  show-source: true
-  level: 5
-admin:
-  endpoint: localhost:30081
-  insecure: true
-plugins:
-  # All k8s plugins default configuration
-  k8s:
-    inject-finalizer: true
-    default-env-vars:
-      - AWS_METADATA_SERVICE_TIMEOUT: 5
-      - AWS_METADATA_SERVICE_NUM_ATTEMPTS: 20
-      - FLYTE_AWS_ENDPOINT: "http://minio.flyte:9000"
-      - FLYTE_AWS_ACCESS_KEY_ID: minio
-      - FLYTE_AWS_SECRET_ACCESS_KEY: miniostorage
-  # Logging configuration
-  logs:
-    kubernetes-enabled: true
-    kubernetes-url: "http://localhost:30082"
-cluster_resources:
-  refreshInterval: 5m
-  templatePath: "/etc/flyte/clusterresource/templates"
-  # -- Starts the cluster resource manager in standalone mode with requisite auth credentials to call flyteadmin service endpoints
-  standaloneDeployment: false
-  customData:
-  - production:
-    - projectQuotaCpu:
-        value: "8"
-    - projectQuotaMemory:
-        value: "16Gi"
-  - staging:
-    - projectQuotaCpu:
-        value: "8"
-    - projectQuotaMemory:
-        value: "16Gi"
-  - development:
-    - projectQuotaCpu:
-        value: "8"
-    - projectQuotaMemory:
-        value: "16Gi"
-  refresh: 5m
-flyte:
-  admin:
-    disableClusterResourceManager: true
-    disableScheduler: true
-  propeller:
-    disableWebhook: true
-task_resources:
-  defaults:
-    cpu: 500m
-    memory: 1Gi
-  limits:
-    cpu: 2
-    memory: 4Gi
-    gpu: 5
-catalog-cache:
-  endpoint: localhost:8081
-  insecure: true
-  type: datacatalog
-
-
 
 ```
 
-5. replace with your own code
-```shell
-
-go mod edit -replace github.com/flyteorg/flyteadmin=/home/ubuntu/flyteadmin
-go mod edit -replace github.com/flyteorg/flytepropeller=/home/ubuntu/flytepropeller
-go mod edit -replace github.com/flyteorg/flyteidl=/home/ubuntu/flyteidl
-go mod edit -replace github.com/flyteorg/flyteplugins=/home/ubuntu/flyteplugins
+8. When developing, You may need to run local test, lint before actaully building the Single binary:
 ```
 
-6. t
-```shell
-flyte start --config flyte_local.yaml
 ```
 
-7. Note: ALL the components logs in this case will output together to the terminal, so you amy want to filter it.
 
 ## How to set dev environment for flyteconsole?
 
