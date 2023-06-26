@@ -18,13 +18,13 @@ So, let's embark on this journey together, easing your transition into the world
 
 ## Content
 - How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
-  
-- How to set dev environment for flyteconsole?
-  
+ 
 - How to set dev environment for flytekit?
   - Run workflow locally
   - Run workflow in sandbox
   - Develop flytekit plugins, using Deck as an example
+  
+- How to set dev environment for flyteconsole?
   
 - Putting everyhing together, How to set dev environment if your PR involve multiple components?
   
