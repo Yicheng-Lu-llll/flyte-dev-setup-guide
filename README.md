@@ -99,9 +99,9 @@ flyte start --config flyte_local.yaml
 The following instructions assume that you'll change flyteidl, flyteadmin, flyteplugins, and flytepropeller simultaneously (features that involve multiple components).
 If you don't need to change some components, simply ignore the instruction for that component.
 ```shell
-# Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins and flytepropeller. 
+# Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins, and flytepropeller.
 
-# Step2: flyteidl/flyteadmin/flyteplugins/flytepropeller uses go1.19, so make sure you switch to go1.19.
+# Step2: Flyteidl, flyteadmin, flyteplugins, and flytepropeller use go1.19, so make sure to switch to go1.19.
 export PATH=$PATH:$(go env GOPATH)/bin
 go install golang.org/dl/go1.19@latest
 go1.19 download
@@ -109,12 +109,12 @@ export GOROOT=$(go1.19 env GOROOT)
 export PATH="$GOROOT/bin:$PATH"
 
 
-# Step3.1: Under flyteidl folder, before building the Single binary, You should run:
+# Step3.1: In the flyteidl folder, before building the single binary, you should run:
 make lint
 make generate
 make test_unit
 
-# Step3.2: Under flyteadmin folder, before building the Single binary, You should run:
+# Step3.2: In the flyteadmin folder, before building the single binary, you should run:
 go mod edit -replace github.com/flyteorg/flytepropeller=/home/ubuntu/flytepropeller #replace with your own local path to flytepropeller
 go mod edit -replace github.com/flyteorg/flyteidl=/home/ubuntu/flyteidl #replace with your own local path to flyteidl
 go mod edit -replace github.com/flyteorg/flyteplugins=/home/ubuntu/flyteplugins # replace with your own local path to flyteplugins
@@ -122,23 +122,23 @@ make lint
 make generate
 make test_unit
 
-# Step3.3: Under flyteplugins folder, before building the Single binary, You should run:
+# Step3.3: In the flyteplugins folder, before building the single binary, you should run:
 go mod edit -replace github.com/flyteorg/flyteidl=/home/ubuntu/flyteidl #replace with your own local path to flyteidl
 
-# Step3.4: Under flytepropeller folder, before building the Single binary, You should run:
+# Step3.4: In the flytepropeller folder, before building the single binary, you should run:
 go mod edit -replace github.com/flyteorg/flyteidl=/home/ubuntu/flyteidl #replace with your own local path to flyteidl
 go mod edit -replace github.com/flyteorg/flyteplugins=/home/ubuntu/flyteplugins # replace with your own local path to flyteplugins
 make lint
 make generate
 make test_unit
 
-# Step4: Now, We can build the Single binary, Under Flyte folder, Run `go mod edit -replace`. This will replace with you own code. 
+# Step4: Now, you can build the single binary. In the Flyte folder, run `go mod edit -replace`. This will replace the code with your own.
 go mod edit -replace github.com/flyteorg/flyteadmin=/home/ubuntu/flyteadmin #replace with your own local path to flyteadmin
 go mod edit -replace github.com/flyteorg/flytepropeller=/home/ubuntu/flytepropeller #replace with your own local path to flytepropeller
 go mod edit -replace github.com/flyteorg/flyteidl=/home/ubuntu/flyteidl #replace with your own local path to flyteidl
 go mod edit -replace github.com/flyteorg/flyteplugins=/home/ubuntu/flyteplugins # replace with your own local path to flyteplugins
 
-# Step5: Rebuild and rerun the Single binary based on your own code.
+# Step5: Rebuild and rerun the single binary based on your own code.
 go mod tidy
 sudo make compile
 flyte start --config flyte_local.yaml
