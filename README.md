@@ -243,7 +243,9 @@ docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f /home/ubuntu/flytekit/D
 docker push ${FLYTE_INTERNAL_IMAGE}
 
 # Step4: Submit workflow to Flyte Cluster
-pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote ./test.py  wf
+git clone https://github.com/flyteorg/flytesnacks
+cd flytesnacks/cookbook
+pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_world.py  my_wf
 
 ```
 
