@@ -254,7 +254,13 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote ./test.py  wf
 ## How to set dev environment for flyteconsole?
 
 ```shell
-# Step1: 
+# Step1: Clone the repo cd to the flyteconsole folder
+https://github.com/flyteorg/flyteconsole.git
+cd flyteconsole
+
+# Step2: Install yarn and
+
+# Step3: Start the server
 yarn build:types
 yarn run build:prod
 export BASE_URL=/console
