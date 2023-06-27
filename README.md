@@ -112,7 +112,6 @@ export PATH="$GOROOT/bin:$PATH"
 # Step3.1: In the flyteidl folder, before building the single binary, you should run:
 make lint
 make generate
-make test_unit
 
 # Step3.2: In the flyteadmin folder, before building the single binary, you should run:
 go mod edit -replace github.com/flyteorg/flytepropeller=/home/ubuntu/flytepropeller #replace with your own local path to flytepropeller
