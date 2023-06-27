@@ -205,6 +205,7 @@ make test
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
 python3 core/flyte_basics/hello_world.py
+# Running my_wf() hello world
 
 ```
 
