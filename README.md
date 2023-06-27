@@ -27,8 +27,6 @@ This guide has been tested and used on AWS EC2 with an Ubuntu 22.04 image. The f
 - How to set dev environment for flyteconsole?
   
 - Putting everyhing together, How to set dev environment if your PR involve multiple components?
-  
-- FAQ
 
 ## How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
 
