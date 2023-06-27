@@ -259,18 +259,36 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_wor
 
 ```shell
 # Step1: Clone the repo cd to the flyteconsole folder
-https://github.com/flyteorg/flyteconsole.git
+git clone https://github.com/flyteorg/flyteconsole.git
 cd flyteconsole
 
-# Step2: Install yarn and
+
+
+
+# Step2: Install Node.js v18.x:
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
+
+# Step3: Install yarn
+npm install yarn@3.2.1
+
+https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable
+
+
+
 
 # Step3: Start the server
-yarn build:types
-yarn run build:prod
 export BASE_URL=/console
-export ADMIN_API_URL=http://localhost:30081
+export ADMIN_API_URL=http://localhost:30080
 export DISABLE_AUTH=1
 export ADMIN_API_USE_SSL="http"
+
+make generate_ssl
+yarn install
+yarn build:types
+yarn run build:prod
+yarn start
+
 ```
 
 
