@@ -26,10 +26,11 @@ Requirements
 ------------
 
 This guide has been tested and used on AWS EC2 with an Ubuntu 22.04
-image. The following tools are required: -
-`Docker <https://docs.docker.com/install/>`__ -
-`Kubectl <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ -
-`Go <https://docs.docker.com/install/>`__
+image. The following tools are required:
+
+- `Docker <https://docs.docker.com/install/>`__
+- `Kubectl <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__
+- `Go <https://golang.org/doc/install>`__
 
 Content
 -------
