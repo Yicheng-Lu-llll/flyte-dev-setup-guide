@@ -188,16 +188,20 @@ flytectl demo start
 #### 2. Run workflow locally
 ```shell
 # Step1: Build virtual environment to develop Flytekit. It will allow your local changes to take effect when the same Python interpreter runs import flytekit
-# In flytekit folder:
+git clone https://github.com/flyteorg/flytekit.git # replace with your own repo
+cd flytekit
 virtualenv ~/.virtualenvs/flytekit
 source ~/.virtualenvs/flytekit/bin/activate
 make setup
 pip install -e .
 pip install gsutil awscli
 
-# Step2: Modify the source code for flytekit.
+# Step2: Modify the source code for flytekit and run unit test and lint.
+make lint
+make test
 
-# Step3: run an sample to test
+
+# Step3: run an sample to test locally
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
 python3 core/flyte_basics/hello_world.py
@@ -205,9 +209,11 @@ python3 core/flyte_basics/hello_world.py
 ```
 
 #### 3. Run workflow in sandbox
-```
+Before running workflow in sandbox, You should make sure you can run workflow locally.
+ 1. Build Flytekit image with your code
+ 2. Push Flytekit image to the Flyte Cluster
+ 3. Submit workflow to Flyte Cluster
 
-```
 
 
 
