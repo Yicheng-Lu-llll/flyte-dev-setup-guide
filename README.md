@@ -23,7 +23,6 @@ This guide has been tested and used on AWS EC2 with an Ubuntu 22.04 image. The f
 - How to set dev environment for flytekit?
   - Run workflow locally
   - Run workflow in sandbox
-  - Develop flytekit plugins, using Deck as an example
   
 - How to set dev environment for flyteconsole?
   
