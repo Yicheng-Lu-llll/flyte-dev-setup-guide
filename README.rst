@@ -103,7 +103,7 @@ The default Username is ``minio`` and the default Password is
 ``miniostorage``. You might need to look at input.pb, output.pb or
 deck.html, etc in Minio when you are developing.
 
-4. Run all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary
+4. Run all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
@@ -213,7 +213,7 @@ components, simply ignore the instruction for that component.
 How to set dev environment for flytekit?
 ----------------------------------------
 
-1. Set up local Flyte Cluster
+1. Set up local Flyte Cluster.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you are modifying the code for flyteidl, flyteadmin, flyteplugins, or
@@ -243,7 +243,7 @@ If not, we can start backends with a single command.
    # 🐋 Flyte sandbox ships with a Docker registry. Tag and push custom workflow images to localhost:30000
    # 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
 
-2. Run workflow locally
+2. Run workflow locally.
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
@@ -270,7 +270,7 @@ If not, we can start backends with a single command.
    python3 core/flyte_basics/hello_world.py
    # Running my_wf() hello world
 
-3. Run workflow in sandbox
+3. Run workflow in sandbox.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 | Before running a workflow in the sandbox, make sure you can run it
@@ -323,7 +323,7 @@ the Flyte Cluster, and finally submit the workflow to the Flyte Cluster.
 How to set dev environment for flyteconsole?
 --------------------------------------------
 
-1. Set up local Flyte Cluster
+1. Set up local Flyte Cluster.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Refer to `How to Set Up a Dev Environment for Flytekit? <#how-to-set-dev-environment-for-flytekit>`__ or `How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller? <#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller>`__ to start the backend.
 
@@ -364,7 +364,7 @@ Refer to `How to Set Up a Dev Environment for Flytekit? <#how-to-set-dev-environ
    # Step7: Start Flyteconsole
    yarn start
 
-3: Final Step: Install the Chrome plugin: `Moesif Origin & CORS Changer <https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc>`__
+3: Final Step: Install the Chrome plugin: `Moesif Origin & CORS Changer <https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc>`__.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We need to disable
