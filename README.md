@@ -292,6 +292,15 @@ yarn run build:prod
 yarn start
 ```
 
+#### 3: Final Step: Install Chrome plugin: Moesif Origin & CORS Changer
+
+NOTE:
+Activate plugin (toggle to "on")
+Open 'Advanced Settings':
+set Access-Control-Allow-Credentials: true
+set Domain List: your.localhost.com
+
+
 
 
 
