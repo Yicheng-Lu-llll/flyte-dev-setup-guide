@@ -101,7 +101,7 @@ If you actually do not need to change some components, simpliy ignore the instru
 ```shell
 # Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins and flytepropeller. 
 
-# Step2: flyteidl/flyteadmin/flyteplugins/flytepropeller uses go1.19, so make sure you use switch to go1.19.
+# Step2: flyteidl/flyteadmin/flyteplugins/flytepropeller uses go1.19, so make sure you switch to go1.19.
 export PATH=$PATH:$(go env GOPATH)/bin
 go install golang.org/dl/go1.19@latest
 go1.19 download
