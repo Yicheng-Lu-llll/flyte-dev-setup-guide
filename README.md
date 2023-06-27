@@ -202,7 +202,6 @@ pip install gsutil awscli
 make lint
 make test
 
-
 # Step3: run an sample to test locally
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
