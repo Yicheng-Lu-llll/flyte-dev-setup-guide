@@ -89,6 +89,7 @@ go mod tidy
 sudo make compile
 
 # Step3: Running the single binary. `flyte_local.yaml` is the config file. It is written to fit all your previous builds. So, you don't need to change `flyte_local.yaml`.
+# Note: Replace `flyte_local.yaml` with file in this PR:https://github.com/flyteorg/flyte/pull/3808. Once it is merged, there is no need to change.
 flyte start --config flyte_local.yaml
 # All logs from flyteadmin, flyteplugins, flytepropeller, etc. will appear in the terminal.
 ```
