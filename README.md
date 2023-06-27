@@ -34,7 +34,7 @@ So, let's embark on this journey together, easing your transition into the world
 
 ## How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
 
-1. install [Flytectl](https://github.com/flyteorg/flytectl), a portable and lightweight command-line interface to work with Flyte.
+#### 1. install [Flytectl](https://github.com/flyteorg/flytectl), a portable and lightweight command-line interface to work with Flyte.
 ```shell
 # Step1: Install the latest version of Flytectl
 curl -sL https://ctl.flyte.org/install | bash
@@ -46,7 +46,7 @@ curl -sL https://ctl.flyte.org/install | bash
 export PATH=$PATH:/home/ubuntu/bin # replace with your path
 ```
 
-2. Build a k3s cluster that runs Minio and Postgres pods.
+#### 2. Build a k3s cluster that runs Minio and Postgres pods.
 [minio](https://min.io/) is an S3-compatible object store that will be used later to store task output, input, etc.
 [postgres](https://www.postgresql.org/) is an open-source object-relational database that will later be used by flyteadmin to store all Flyte information.
 
@@ -73,10 +73,10 @@ kubectl get pod -n flyte
 # flyte-sandbox-postgresql-0                            1/1     Running   0          5m
 ```
 
-3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.
+#### 3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.
 The default Username is `minio` and the default Password is `miniostorage`. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
  
-5. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
+#### 4. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
 ```shell
 # Step1: Download flyte repo
 git clone https://github.com/flyteorg/flyte.git
@@ -93,9 +93,9 @@ flyte start --config flyte_local.yaml
 # All logs from flyteadmin, flyteplugins, flytepropeller, etc. will appear in the terminal.
 ```
 
-6. [Optional] Now, you can access the Flyte UI at http://localhost:30080/console.
+#### 5. [Optional] Now, you can access the Flyte UI at http://localhost:30080/console.
    
-7. Previously, we built a single binary that bundles all backends (flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server. Now let's build with your own code. 
+#### 6. Previously, we built a single binary that bundles all backends (flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server. Now let's build with your own code. 
 The following instructions assume that you'll change flyteidl, flyteadmin, flyteplugins, and flytepropeller simultaneously (features that involve multiple components).
 If you don't need to change some components, simply ignore the instruction for that component.
 ```shell
@@ -143,7 +143,7 @@ sudo make compile
 flyte start --config flyte_local.yaml
 ```
 
-8. Let's quickly test it by running a Hello World workflow.
+#### 7. Let's quickly test it by running a Hello World workflow.
 ```shell
 # Step1: Install flytekit
 pip install flytekit && export PATH=$PATH:~/.local/bin
@@ -160,7 +160,7 @@ pyflyte run --remote core/flyte_basics/hello_world.py my_wf
 # Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/fd63f88a55fed4bba846 to see execution in the console.
 ```
    
-9. After you finish developing, you can tear down the k3s cluster.
+#### 8. After you finish developing, you can tear down the k3s cluster.
 ```shell
 flytectl demo teardown
 # context removed for "flyte-sandbox".
@@ -173,7 +173,16 @@ flytectl demo teardown
 ## How to set dev environment for flytekit?
 
 1. If you also change the code for flyteidl, flyteadmin, flyteplugins or flytepropeller, you can refer to the `How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?` to build the backends.
-If not, run `flytectl demo start` to start 
+If not, we can start backends in one command.
+```shell
+# Step1: Create backends. It will set up a k3s cluster that runs Minio, Postgres pods and all Flyte components: flyteadmin, flyteplugins, flytepropeller, etc.
+flytectl demo start
+# 👨‍💻 Flyte is ready! Flyte UI is available at http://localhost:30080/console 🚀 🚀 🎉 
+# ❇️ Run the following command to export demo environment variables for accessing flytectl
+#         export FLYTECTL_CONFIG=/home/ubuntu/.flyte/config-sandbox.yaml 
+# 🐋 Flyte sandbox ships with a Docker registry. Tag and push custom workflow images to localhost:30000
+# 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
+```
 
 ```shell
 virtualenv ~/.virtualenvs/flytekit
