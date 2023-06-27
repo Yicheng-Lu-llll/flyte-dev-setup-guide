@@ -198,6 +198,9 @@ source ~/.virtualenvs/flytekit/bin/activate
 make setup
 pip install -e .
 pip install gsutil awscli
+# If you are also developing the plugins, execute the following:
+cd plugins
+pip install -e .
 
 # Step2: Modify the source code for flytekit, then run unit tests and lint.
 make lint
