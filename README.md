@@ -222,23 +222,18 @@ WORKDIR /root
 ENV PYTHONPATH /root
 RUN apt-get update && apt-get install build-essential -y
 RUN apt-get install git -y
-RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@real-time-deck-support
-ENV FLYTE_INTERNAL_IMAGE "yichenglu/flytekit:MetricsExploration19"
+RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@visualization
+ENV FLYTE_INTERNAL_IMAGE "localhost:30000/flytekit:visualization"
 ```
 The following instautions tells how to build the image, push the image to Flyte Cluster and finally Submit workflow to Flyte Cluster.
 ```shell
-export PATH=$PATH:~/.local/bin
-export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml
-export KUBECONFIG=$KUBECONFIG:/root/.kube/config:/root/.flyte/k3s/k3s.yaml
-
 # Step1: make sure to push your change to the remote repo
 # In flytekit folder
 git add . && git commit -s -m "develop" && git push
 
 # Step2: build the image
-export FLYTE_INTERNAL_IMAGE="localhost:30000/flytekit:visualization-continue23"
+export FLYTE_INTERNAL_IMAGE="localhost:30000/flytekit:visualization"
 docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f /home/ubuntu/flytekit/Dockerfile .
-
 
 # Step3: push the image to Flyte Cluster
 docker push ${FLYTE_INTERNAL_IMAGE}
@@ -247,7 +242,7 @@ docker push ${FLYTE_INTERNAL_IMAGE}
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
 pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_world.py  my_wf
-
+# Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/f5c17e1b5640c4336bf8 to see execution in the console.
 ```
 
 
