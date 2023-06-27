@@ -263,7 +263,7 @@ git clone https://github.com/flyteorg/flyteconsole.git
 cd flyteconsole
 
 
-# Step2: Install Node.js 18. Refer to  https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2.
+# Step2: Install Node.js 18. Refer to https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2.
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
