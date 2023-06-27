@@ -202,7 +202,7 @@ pip install gsutil awscli
 make lint
 make test
 
-# Step3: run an sample to test locally
+# Step3: run an hello worldc sample to test locally
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
 python3 core/flyte_basics/hello_world.py
@@ -238,11 +238,16 @@ docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f /home/ubuntu/flytekit/D
 # Step3: push the image to Flyte Cluster
 docker push ${FLYTE_INTERNAL_IMAGE}
 
-# Step4: Submit workflow to Flyte Cluster
+# Step4: Submit a hello world workflow to Flyte Cluster
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
+# Note create the flytesnacks-development namespace if not exists: 
+# This is necessary because, by default (without creating a new project), task pods will run in the flytesnacks-development namespace.
+# kubectl create namespace flytesnacks-development
 pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_world.py  my_wf
 # Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/f5c17e1b5640c4336bf8 to see execution in the console.
+
+
 ```
 
 
