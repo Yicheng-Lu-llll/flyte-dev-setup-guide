@@ -285,7 +285,7 @@ make generate_ssl
 
 # Step6: Install nodepackages
 yarn install
-yarn build:types
+yarn build:types # It is fine if seeing error `Property 'at' does not exist on type 'string[]'`
 yarn run build:prod
 
 # Step7: Start flyteconsole
