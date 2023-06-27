@@ -213,7 +213,7 @@ python3 core/flyte_basics/hello_world.py
 #### 3. Run workflow in sandbox
 Before running workflow in sandbox, You should make sure you can run workflow locally.
 To run workflow in sandbox, We need to build the flyekit image. The following Dockerfile is the minum setting to run a task. 
-You can refer to how the [officail flitekit image](https://github.com/flyteorg/flytekit/blob/master/Dockerfile) is built to add more componnents if you need to.
+You can refer to how the [officail flitekit image](https://github.com/flyteorg/flytekit/blob/master/Dockerfile) is built to add more componnents(like plugins) if you need to.
 Please make the following Dockerfile under your flytekit folder.
 ```Dockerfile
 FROM python:3.9-slim-buster
