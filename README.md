@@ -47,7 +47,7 @@ export PATH=$PATH:/home/ubuntu/bin # replace with your path
 ```
 
 #### 2. Build a k3s cluster that runs Minio and Postgres pods.
-[minio](https://min.io/) is an S3-compatible object store that will be used later to store task output, input, etc.
+[minio](https://min.io/) is an S3-compatible object store that will be used later to store task output, input, etc.  
 [postgres](https://www.postgresql.org/) is an open-source object-relational database that will later be used by flyteadmin to store all Flyte information.
 
 ```shell
@@ -73,7 +73,7 @@ kubectl get pod -n flyte
 # flyte-sandbox-postgresql-0                            1/1     Running   0          5m
 ```
 
-#### 3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.
+#### 3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.  
 The default Username is `minio` and the default Password is `miniostorage`. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
  
 #### 4. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
