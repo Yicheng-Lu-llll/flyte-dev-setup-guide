@@ -256,8 +256,9 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_wor
 ```
 
 ## How to set dev environment for flyteconsole?
-You can refer to How to set dev environment for flytekit? or How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller? to start backend.
+#### 1. refer to How to set dev environment for flytekit? or How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller? to start backend.
 
+#### 2. Start flyteconsole.
 ```shell
 # Step1: Clone the repo cd to the flyteconsole folder
 git clone https://github.com/flyteorg/flyteconsole.git
@@ -292,13 +293,14 @@ yarn run build:prod
 yarn start
 ```
 
-#### 3: Final Step: Install Chrome plugin: Moesif Origin & CORS Changer
-
-NOTE:
-Activate plugin (toggle to "on")
-Open 'Advanced Settings':
-set Access-Control-Allow-Credentials: true
-set Domain List: your.localhost.com
+#### 3: Final Step: Install Chrome plugin: [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc)
+We need to disable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) in order to loading resources.
+```
+1. Activate plugin (toggle to "on")
+2. Open 'Advanced Settings':
+3. set Access-Control-Allow-Credentials: true
+4. set Domain List: your.localhost.com
+```
 
 
 
