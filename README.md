@@ -298,6 +298,8 @@ We need to disable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 3. set Access-Control-Allow-Credentials: true
 ```
 
+#### 4: Go to http://localhost:3000/console/.
+
 
 
 
