@@ -15,15 +15,13 @@ This guide has been tested and used on AWS EC2 with an Ubuntu 22.04 image. The f
 - [Go](https://docs.docker.com/install/)
 
 ## Content
-- How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
+- [How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?](#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller)
  
-- How to set dev environment for flytekit?
-  - Run workflow locally
-  - Run workflow in sandbox
+- [How to set dev environment for flytekit?](#how-to-set-dev-environment-for-flytekit)
+  - [Run workflow locally](#run-workflow-locally)
+  - [Run workflow in sandbox](#run-workflow-in-sandbox)
   
-- How to set dev environment for flyteconsole?
-  
-- Putting everyhing together, How to set dev environment if your PR involve multiple components?
+- [How to set dev environment for flyteconsole?](#how-to-set-dev-environment-for-flyteconsole)
 
 ## How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
 
@@ -168,7 +166,7 @@ flytectl demo teardown
 ## How to set dev environment for flytekit?
 
 #### 1. Set up local Flyte Cluster
-If you are modifying the code for flyteidl, flyteadmin, flyteplugins, or flytepropeller, you can refer to How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller? to build the backends.
+If you are modifying the code for flyteidl, flyteadmin, flyteplugins, or flytepropeller, you can refer to [How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller?](#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller) to build the backends.
 
 If not, we can start backends with a single command.
 ```shell
@@ -253,7 +251,7 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_wor
 ```
 
 ## How to set dev environment for flyteconsole?
-#### 1. Refer to "How to Set Up a Dev Environment for Flytekit?" or "How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller?" to start the backend.
+#### 1. Refer to [How to Set Up a Dev Environment for Flytekit?](#how-to-set-dev-environment-for-flytekit) or [How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller?](#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller) to start the backend.
 
 #### 2. Start Flyteconsole.
 ```shell
