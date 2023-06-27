@@ -280,6 +280,7 @@ export DISABLE_AUTH=1
 export ADMIN_API_USE_SSL="http"
 
 # Step5: Generate SSL certificate
+# Note, Since we will use http, SSL is not required, but missing SSL certificate will casue error to start the flyteconsole.
 make generate_ssl
 
 # Step6: Install nodepackages
