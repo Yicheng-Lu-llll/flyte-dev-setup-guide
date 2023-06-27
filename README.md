@@ -230,8 +230,8 @@ WORKDIR /root
 ENV PYTHONPATH /root
 RUN apt-get update && apt-get install build-essential -y
 RUN apt-get install git -y
-RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@visualization
-ENV FLYTE_INTERNAL_IMAGE "localhost:30000/flytekit:visualization"
+RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@demo
+ENV FLYTE_INTERNAL_IMAGE "localhost:30000/flytekit:demo"
 ```
 The instructions below explain how to build the image, push the image to the Flyte Cluster, and finally submit the workflow to the Flyte Cluster.
 ```shell
@@ -241,7 +241,7 @@ git add . && git commit -s -m "develop" && git push
 
 # Step2: Build the image
 # In the flytekit folder
-export FLYTE_INTERNAL_IMAGE="localhost:30000/flytekit:visualization"
+export FLYTE_INTERNAL_IMAGE="localhost:30000/flytekit:demo"
 docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f ./Dockerfile .
 
 # Step3: Push the image to the Flyte Cluster
