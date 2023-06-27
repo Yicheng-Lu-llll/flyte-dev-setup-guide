@@ -256,6 +256,7 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_wor
 ```
 
 ## How to set dev environment for flyteconsole?
+You can refer to How to set dev environment for flytekit? or How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller? to start backend.
 
 ```shell
 # Step1: Clone the repo cd to the flyteconsole folder
@@ -263,32 +264,31 @@ git clone https://github.com/flyteorg/flyteconsole.git
 cd flyteconsole
 
 
-
-
-# Step2: Install Node.js v18.x:
+# Step2: Install Node.js 18. Refer to https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2.
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
-# Step3: Install yarn
-npm install yarn@3.2.1
+# Step3: Install yarn. Refer to https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable.
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install yarn
 
-https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable
-
-
-
-
-# Step3: Start the server
+# Step4: Add env var
 export BASE_URL=/console
 export ADMIN_API_URL=http://localhost:30080
 export DISABLE_AUTH=1
 export ADMIN_API_USE_SSL="http"
 
+# Step5: Generate SSL certificate
 make generate_ssl
+
+# Step6: Install nodepackages
 yarn install
 yarn build:types
 yarn run build:prod
-yarn start
 
+# Step7: Start flyteconsole
+yarn start
 ```
 
 
