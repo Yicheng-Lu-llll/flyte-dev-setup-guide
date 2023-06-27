@@ -323,8 +323,9 @@ the Flyte Cluster, and finally submit the workflow to the Flyte Cluster.
 How to set dev environment for flyteconsole?
 --------------------------------------------
 
-1. Refer to `How to Set Up a Dev Environment for Flytekit? <#how-to-set-dev-environment-for-flytekit>`__ or `How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller? <#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller>`__ to start the backend.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Set up local Flyte Cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Refer to `How to Set Up a Dev Environment for Flytekit? <#how-to-set-dev-environment-for-flytekit>`__ or `How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller? <#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller>`__ to start the backend.
 
 2. Start Flyteconsole.
 ~~~~~~~~~~~~~~~~~~~~~~
