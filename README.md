@@ -143,23 +143,25 @@ go mod tidy
 sudo make compile
 flyte start --config flyte_local.yaml
 ```
-7. Let's quickly test it by running a hellow world workflow.
+
+8. Let's quickly test it by running a Hello World workflow.
 ```shell
-# Step1: install flytekit
+# Step1: Install flytekit
 pip install flytekit && export PATH=$PATH:~/.local/bin
 
-# Step2: flytesnacks repo provide lots of useful examples
+# Step2: The flytesnacks repository provides a lot of useful examples.
 git clone https://github.com/flyteorg/flytesnacks && cd flytesnacks/cookbook
 
-# Step3: Before running worflow, create flytesnacks-development namespace. Becasue by default(without creating new project), task pod will be running in flytesnacks-development namespace.
+# Step3: Before running the workflow, create the flytesnacks-development namespace. 
+# This is necessary because, by default (without creating a new project), task pods will run in the flytesnacks-development namespace.
 kubectl create namespace flytesnacks-development
 
-# Step4: Run a hello_world example
+# Step4: Run a Hello World example
 pyflyte run --remote core/flyte_basics/hello_world.py my_wf
 # Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/fd63f88a55fed4bba846 to see execution in the console.
 ```
    
-8. After you finish developing, you can tear down the k3s cluster.
+9. After you finish developing, you can tear down the k3s cluster.
 ```shell
 flytectl demo teardown
 # context removed for "flyte-sandbox".
