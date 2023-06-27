@@ -33,7 +33,7 @@ So, let's embark on this journey together, easing your transition into the world
 
 ## How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
 
-1. install [Flytectl](https://github.com/flyteorg/flytectl). It is a portable and lightweight command-line interface to work with Flyte.
+1. install [Flytectl](https://github.com/flyteorg/flytectl), a portable and lightweight command-line interface to work with Flyte.
 ```shell
 # Step1: install the latest version of Flytectl
 curl -sL https://ctl.flyte.org/install | bash
@@ -45,9 +45,9 @@ curl -sL https://ctl.flyte.org/install | bash
 export PATH=$PATH:/home/ubuntu/bin # replace with your path
 ```
 
-2. Build an k3s cluster that runs minio and postgres pod.
-[minio](https://min.io/) is a S3 compatible object store that will later be used to store task output, input etc.
-[postgres](https://www.postgresql.org/) is am open source object-relational database that will later be used by flyteadmin to store all flyte infomation.
+2. Build a k3s cluster that runs Minio and Postgres pods.
+[minio](https://min.io/) is an S3-compatible object store that will be used later to store task output, input, etc.
+[postgres](https://www.postgresql.org/) is an open-source object-relational database that will later be used by flyteadmin to store all Flyte information.
 
 ```shell
 # Step1: start k3 scluster, create pod for postgres, minio. NOTE, We can not access Flyte UI yet, but we can access Minio console now.
@@ -72,9 +72,8 @@ Check we can access K3s cluster. Check the postgres and minio is running.
 # flyte-sandbox-postgresql-0                            1/1     Running   0          5m
 ```
 
-3. [Optional] Access Minio console via `http://localhost:30080/minio/login`.
-The default Username is `minio`, the default Password is `miniostorage`.
-Later, when developing, You amy need to look at the input.pb, output.pb or deck.html in the Minio.
+3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.
+The default Username is minio and the default Password is miniostorage. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
  
 5. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
 ```shell
@@ -93,11 +92,11 @@ flyte start --config flyte_local.yaml
 # All logs from flyteadmin, flyteplugins, flytepropeller ... will appear in the terminal
 ```
 
-6. [Optional] Now, you are able to access Flyte UI:http://localhost:30080/console.
+6. [Optional] Now, you can access the Flyte UI at http://localhost:30080/console.
    
-7. Previously, we build Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server, now let's replace with you own code.
-For all below instruction, I will assume you will change flyteidl, flyteadmin, flyteplugins and flytepropeller at the same time(features that involve multiple components),
-If you actually do not need to change some components, simpliy ignore the instruction for that component.
+7. Previously, we built a single binary that bundles all backends (flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server. Now let's build with your own code. 
+The following instructions assume that you'll change flyteidl, flyteadmin, flyteplugins, and flytepropeller simultaneously (features that involve multiple components).
+If you don't need to change some components, simply ignore the instruction for that component.
 ```shell
 # Step1: Modify the source code for flyteidl, flyteadmin, flyteplugins and flytepropeller. 
 
@@ -144,7 +143,7 @@ sudo make compile
 flyte start --config flyte_local.yaml
 ```
 
-8. After finish developing, we can teardown the k3s cluster.
+8. After you finish developing, you can tear down the k3s cluster.
 ```shell
 flytectl demo teardown
 # context removed for "flyte-sandbox".
@@ -157,7 +156,7 @@ flytectl demo teardown
 ## How to set dev environment for flytekit?
 
 1. If you also change the code for flyteidl, flyteadmin, flyteplugins or flytepropeller, you can refer to the `How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?` to build the backends.
-If not, We can simply run `flytectl demo start`
+If not, run `flytectl demo start` to start 
 
 ```shell
 virtualenv ~/.virtualenvs/flytekit
