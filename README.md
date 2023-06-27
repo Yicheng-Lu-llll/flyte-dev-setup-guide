@@ -1,6 +1,3 @@
-# !!!WIP!!!
-
-
 # Setting Sail with Flyte: A Beginners Guide to Dev Environment Setup
 
 If you're reading this, you likely have an interest in Flyte, an open-source data, ML, and infrastructure orchestrator that simplifies the creation, scaling, and maintenance of concurrent workflows. Like many in the open-source community, you might be eager to contribute but find the initial setup process a daunting hurdle.
@@ -256,16 +253,16 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_wor
 ```
 
 ## How to set dev environment for flyteconsole?
-#### 1. refer to How to set dev environment for flytekit? or How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller? to start backend.
+#### 1. Refer to "How to Set Up a Dev Environment for Flytekit?" or "How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller?" to start the backend.
 
-#### 2. Start flyteconsole.
+#### 2. Start Flyteconsole.
 ```shell
-# Step1: Clone the repo cd to the flyteconsole folder
+# Step1: Clone the repo and navigate to the Flyteconsole folder
 git clone https://github.com/flyteorg/flyteconsole.git
 cd flyteconsole
 
 
-# Step2: Install Node.js 18. Refer to https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2.
+# Step2: Install Node.js 18. Refer to  https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2.
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
@@ -274,32 +271,31 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update && sudo apt install yarn
 
-# Step4: Add env var
+# Step4: Add environment variables
 export BASE_URL=/console
 export ADMIN_API_URL=http://localhost:30080
 export DISABLE_AUTH=1
 export ADMIN_API_USE_SSL="http"
 
 # Step5: Generate SSL certificate
-# Note, Since we will use http, SSL is not required, but missing SSL certificate will casue error to start the flyteconsole.
+# Note, since we will use HTTP, SSL is not required. However, missing an SSL certificate will cause an error when starting Flyteconsole.
 make generate_ssl
 
-# Step6: Install nodepackages
+# Step6: Install node packages
 yarn install
 yarn build:types # It is fine if seeing error `Property 'at' does not exist on type 'string[]'`
 yarn run build:prod
 
-# Step7: Start flyteconsole
+# Step7: Start Flyteconsole
 yarn start
 ```
 
-#### 3: Final Step: Install Chrome plugin: [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc)
-We need to disable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) in order to loading resources.
+#### 3: Final Step: Install the Chrome plugin:  [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc)
+We need to disable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) to load resources.
 ```
 1. Activate plugin (toggle to "on")
 2. Open 'Advanced Settings':
 3. set Access-Control-Allow-Credentials: true
-4. set Domain List: your.localhost.com
 ```
 
 
