@@ -73,10 +73,10 @@ kubectl get pod -n flyte
 # flyte-sandbox-postgresql-0                            1/1     Running   0          5m
 ```
 
-#### 3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.  
+#### 3. [Optional] Access the Minio console via http://localhost:30080/minio/login.  
 The default Username is `minio` and the default Password is `miniostorage`. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
  
-#### 4. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
+#### 4. Run all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
 ```shell
 # Step1: Download flyte repo
 git clone https://github.com/flyteorg/flyte.git
@@ -93,9 +93,9 @@ flyte start --config flyte_local.yaml
 # All logs from flyteadmin, flyteplugins, flytepropeller, etc. will appear in the terminal.
 ```
 
-#### 5. [Optional] Now, you can access the Flyte UI at http://localhost:30080/console.
+#### 5. [Optional] Access the Flyte UI at http://localhost:30080/console.
    
-#### 6. Previously, we built a single binary that bundles all backends (flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server. Now let's build with your own code. 
+#### 6. Build single binary with your own code. 
 The following instructions assume that you'll change flyteidl, flyteadmin, flyteplugins, and flytepropeller simultaneously (features that involve multiple components).
 If you don't need to change some components, simply ignore the instruction for that component.
 ```shell
@@ -143,7 +143,7 @@ sudo make compile
 flyte start --config flyte_local.yaml
 ```
 
-#### 7. Let's quickly test it by running a Hello World workflow.
+#### 7. Test it by running a Hello World workflow.
 ```shell
 # Step1: Install flytekit
 pip install flytekit && export PATH=$PATH:~/.local/bin
@@ -160,7 +160,7 @@ pyflyte run --remote core/flyte_basics/hello_world.py my_wf
 # Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/fd63f88a55fed4bba846 to see execution in the console.
 ```
    
-#### 8. After you finish developing, you can tear down the k3s cluster.
+#### 8. Tear down the k3s cluster After finishing developing.
 ```shell
 flytectl demo teardown
 # context removed for "flyte-sandbox".
