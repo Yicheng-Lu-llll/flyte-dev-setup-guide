@@ -67,7 +67,7 @@ kubectl get pod -n flyte
 #### 3. [Optional] Access the Minio console via http://localhost:30080/minio/login.  
 The default Username is `minio` and the default Password is `miniostorage`. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
  
-#### 4. Run all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
+#### 4. Run all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary.
 ```shell
 # Step1: Download flyte repo
 git clone https://github.com/flyteorg/flyte.git
@@ -165,7 +165,7 @@ flytectl demo teardown
 
 ## How to set dev environment for flytekit?
 
-#### 1. Set up local Flyte Cluster
+#### 1. Set up local Flyte Cluster.
 If you are modifying the code for flyteidl, flyteadmin, flyteplugins, or flytepropeller, you can refer to [How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller?](#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller) to build the backends.
 
 If not, we can start backends with a single command.
@@ -188,7 +188,7 @@ flytectl demo start
 # 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
 ```
 
-#### 2. Run workflow locally
+#### 2. Run workflow locally.
 ```shell
 # Step1: Build a virtual environment for developing Flytekit. This will allow your local changes to take effect when the same Python interpreter runs `import flytekit`.
 git clone https://github.com/flyteorg/flytekit.git # replace with your own repo
@@ -214,7 +214,7 @@ python3 core/flyte_basics/hello_world.py
 
 ```
 
-#### 3. Run workflow in sandbox
+#### 3. Run workflow in sandbox.
 Before running a workflow in the sandbox, make sure you can run it locally.  
 To run the workflow in the sandbox, we need to build the flytekit image. The following Dockerfile is the minimum setting required to run a task.  
 You can refer to how the [officail flitekit image](https://github.com/flyteorg/flytekit/blob/master/Dockerfile) is built to add more components (like plugins) if needed.  
@@ -254,7 +254,8 @@ pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_wor
 ```
 
 ## How to set dev environment for flyteconsole?
-#### 1. Refer to [How to Set Up a Dev Environment for Flytekit?](#how-to-set-dev-environment-for-flytekit) or [How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller?](#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller) to start the backend.
+#### 1. Set up local Flyte Cluster.
+Refer to [How to Set Up a Dev Environment for Flytekit?](#how-to-set-dev-environment-for-flytekit) or [How to Set Up a Development Environment for Flyteidl, Flyteadmin, Flyteplugins, and Flytepropeller?](#how-to-set-dev-environment-for-flyteidl-flyteadmin-flyteplugins-flytepropeller) to start the backend.
 
 #### 2. Start Flyteconsole.
 ```shell
