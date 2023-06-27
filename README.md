@@ -35,13 +35,13 @@ So, let's embark on this journey together, easing your transition into the world
 
 1. install [Flytectl](https://github.com/flyteorg/flytectl), a portable and lightweight command-line interface to work with Flyte.
 ```shell
-# Step1: install the latest version of Flytectl
+# Step1: Install the latest version of Flytectl
 curl -sL https://ctl.flyte.org/install | bash
 # flyteorg/flytectl info checking GitHub for latest tag
 # flyteorg/flytectl info found version: 0.6.39 for v0.6.39/Linux/x86_64
 # flyteorg/flytectl info installed ./bin/flytectl
 
-# Step2: export Flytectl path baseed on previous log "flyteorg/flytectl info installed ./bin/flytectl"
+# Step2: Export Flytectl path based on the previous log "flyteorg/flytectl info installed ./bin/flytectl"
 export PATH=$PATH:/home/ubuntu/bin # replace with your path
 ```
 
@@ -50,7 +50,7 @@ export PATH=$PATH:/home/ubuntu/bin # replace with your path
 [postgres](https://www.postgresql.org/) is an open-source object-relational database that will later be used by flyteadmin to store all Flyte information.
 
 ```shell
-# Step1: start k3 scluster, create pod for postgres, minio. NOTE, We can not access Flyte UI yet, but we can access Minio console now.
+# Step1: Start k3s cluster, create pods for Postgres and Minio. Note: We cannot access Flyte UI yet! but we can access the Minio console now.
 flytectl demo start --dev
 # 👨‍💻 Flyte is ready! Flyte UI is available at http://localhost:30080/console 🚀 🚀 🎉 
 # ❇️ Run the following command to export demo environment variables for accessing flytectl
@@ -58,12 +58,12 @@ flytectl demo start --dev
 # 🐋 Flyte sandbox ships with a Docker registry. Tag and push custom workflow images to localhost:30000
 # 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
 
-# Step2: export FLYTECTL_CONFIG as previous log indicated.
+# Step2: Export FLYTECTL_CONFIG as the previous log indicated.
 export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml 
 
-# Step3: kubeconfig will be auto copied to the user's main kubeconfig(default is `~/.kube/config`) with "flyte-sandbox" as the context name.
-Check we can access K3s cluster. Check the postgres and minio is running.
-# kubectl get pod -n flyte
+# Step3: The kubeconfig will be automatically copied to the user's main kubeconfig (default is `~/.kube/config`) with "flyte-sandbox" as the context name.
+# Check that we can access the K3s cluster. Verify that Postgres and Minio are running.
+kubectl get pod -n flyte
 # NAME                                                  READY   STATUS    RESTARTS   AGE
 # flyte-sandbox-docker-registry-85745c899d-dns8q        1/1     Running   0          5m
 # flyte-sandbox-kubernetes-dashboard-6757db879c-wl4wd   1/1     Running   0          5m
@@ -77,19 +77,20 @@ The default Username is minio and the default Password is miniostorage. You migh
  
 5. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
 ```shell
-# Step1: download flyte
+# Step1: Download flyte repo
 git clone https://github.com/flyteorg/flyte.git
 cd flyte
 
-# Step2: build a Single binary that bundles all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server.
-The version of flyteidl, flyteadmin, flyteplugins and flytepropeller you used to build Single binary is defined in `go.mod`.
+# Step2: Build a single binary that bundles all the backends (flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server.
+# The versions of flyteidl, flyteadmin, flyteplugins, and flytepropeller used to build the single binary are defined in `go.mod`.
+sudo apt-get -y install jq # You may need to install jq
 sudo apt-get -y install jq # You may need to install jq
 go mod tidy
 sudo make compile
 
-# Step3: Running the Single binary. flyte_local.yaml is the config file. It is write to fit with the all you previous built. So, you do not need to change the flyte_local.yaml.
+# Step3: Running the single binary. `flyte_local.yaml` is the config file. It is written to fit all your previous builds. So, you don't need to change `flyte_local.yaml`.
 flyte start --config flyte_local.yaml
-# All logs from flyteadmin, flyteplugins, flytepropeller ... will appear in the terminal
+# All logs from flyteadmin, flyteplugins, flytepropeller, etc. will appear in the terminal.
 ```
 
 6. [Optional] Now, you can access the Flyte UI at http://localhost:30080/console.
