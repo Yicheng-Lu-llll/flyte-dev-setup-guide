@@ -292,7 +292,7 @@ yarn run build:prod
 yarn start
 ```
 
-#### 3: Final Step: Install the Chrome plugin:  [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc)
+#### 3: Final Step: Install the Chrome plugin:  [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc).
 We need to disable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) to load resources.
 ```
 1. Activate plugin (toggle to "on")
