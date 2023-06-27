@@ -172,7 +172,8 @@ flytectl demo teardown
 
 ## How to set dev environment for flytekit?
 
-1. If you also change the code for flyteidl, flyteadmin, flyteplugins or flytepropeller, you can refer to the `How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?` to build the backends.
+#### 1. Set local Flyte Cluster
+If you also change the code for flyteidl, flyteadmin, flyteplugins or flytepropeller, you can refer to `How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?` to build the backends.
 If not, we can start backends in one command.
 ```shell
 # Step1: Create backends. It will set up a k3s cluster that runs Minio, Postgres pods and all Flyte components: flyteadmin, flyteplugins, flytepropeller, etc.
@@ -184,22 +185,36 @@ flytectl demo start
 # 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
 ```
 
+#### 2. Run workflow locally
 ```shell
+# Step1: Build virtual environment to develop Flytekit. It will allow your local changes to take effect when the same Python interpreter runs import flytekit
+# In flytekit folder:
 virtualenv ~/.virtualenvs/flytekit
 source ~/.virtualenvs/flytekit/bin/activate
 make setup
 pip install -e .
 pip install gsutil awscli
-cd plugins
-pip install -e .
+
+# Step2: Modify the source code for flytekit.
+
+# Step3: run an sample to test
+git clone https://github.com/flyteorg/flytesnacks
+cd flytesnacks/cookbook
+python3 core/flyte_basics/hello_world.py
+
+```
+
+#### 3. Run workflow in sandbox
+```
+
 ```
 
 
 
 ## How to set dev environment for flyteconsole?
 
-1. WIP
 ```shell
+# Step1: 
 yarn build:types
 yarn run build:prod
 export BASE_URL=/console
