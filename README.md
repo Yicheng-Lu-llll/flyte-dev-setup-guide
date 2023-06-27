@@ -16,6 +16,7 @@ So, let's embark on this journey together, easing your transition into the world
 - This guide is used and tested on AWS EC2 with ubuntu 22.04 image.
 - Docker
 - Kubectl
+- Go
 
 ## Content
 - How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
@@ -54,12 +55,12 @@ export PATH=$PATH:/home/ubuntu/bin # replace with your path
 flytectl demo start --dev
 # 👨‍💻 Flyte is ready! Flyte UI is available at http://localhost:30080/console 🚀 🚀 🎉 
 # ❇️ Run the following command to export demo environment variables for accessing flytectl
-#         export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml 
+#         export FLYTECTL_CONFIG=/home/ubuntu/.flyte/config-sandbox.yaml 
 # 🐋 Flyte sandbox ships with a Docker registry. Tag and push custom workflow images to localhost:30000
 # 📂 The Minio API is hosted on localhost:30002. Use http://localhost:30080/minio/login for Minio console
 
 # Step2: Export FLYTECTL_CONFIG as the previous log indicated.
-export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml 
+FLYTECTL_CONFIG=/home/ubuntu/.flyte/config-sandbox.yaml
 
 # Step3: The kubeconfig will be automatically copied to the user's main kubeconfig (default is `~/.kube/config`) with "flyte-sandbox" as the context name.
 # Check that we can access the K3s cluster. Verify that Postgres and Minio are running.
@@ -73,7 +74,7 @@ kubectl get pod -n flyte
 ```
 
 3. [Optional] You can access the Minio console via http://localhost:30080/minio/login.
-The default Username is minio and the default Password is miniostorage. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
+The default Username is `minio` and the default Password is `miniostorage`. You might need to look at input.pb, output.pb or deck.html, etc in Minio when you are developing.
  
 5. now, let's start all backends(flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server in a single binary 
 ```shell
@@ -83,7 +84,6 @@ cd flyte
 
 # Step2: Build a single binary that bundles all the backends (flyteidl, flyteadmin, flyteplugins, flytepropeller) and HTTP Server.
 # The versions of flyteidl, flyteadmin, flyteplugins, and flytepropeller used to build the single binary are defined in `go.mod`.
-sudo apt-get -y install jq # You may need to install jq
 sudo apt-get -y install jq # You may need to install jq
 go mod tidy
 sudo make compile
@@ -143,7 +143,23 @@ go mod tidy
 sudo make compile
 flyte start --config flyte_local.yaml
 ```
+7. Let's quickly test it by running a hellow world workflow.
+```
+# Step1: install flytekit
+pip install flytekit && export PATH=$PATH:~/.local/bin
 
+
+# Step2: flytesnacks repo provide lots of useful examples
+git clone https://github.com/flyteorg/flytesnacks && cd flytesnacks/cookbook
+
+# Step3: Before running worflow, create flytesnacks-development namespace. Becasue by default(without creating new project), task pod will be running in flytesnacks-development namespace.
+kubectl create namespace flytesnacks-development
+
+# Step4: Run a hello_world example
+pyflyte run --remote core/flyte_basics/hello_world.py my_wf
+# Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/fd63f88a55fed4bba846 to see execution in the console.
+```
+   
 8. After you finish developing, you can tear down the k3s cluster.
 ```shell
 flytectl demo teardown
