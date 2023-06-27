@@ -19,7 +19,7 @@ So, let's embark on this journey together, easing your transition into the world
 - Go
 
 ## Content
-- [How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?](Submit a hello world workflow to the Flyte Cluster)
+- How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
  
 - How to set dev environment for flytekit?
   - Run workflow locally
