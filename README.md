@@ -144,10 +144,9 @@ sudo make compile
 flyte start --config flyte_local.yaml
 ```
 7. Let's quickly test it by running a hellow world workflow.
-```
+```shell
 # Step1: install flytekit
 pip install flytekit && export PATH=$PATH:~/.local/bin
-
 
 # Step2: flytesnacks repo provide lots of useful examples
 git clone https://github.com/flyteorg/flytesnacks && cd flytesnacks/cookbook
