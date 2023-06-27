@@ -8,11 +8,11 @@ So, let's embark on this journey together, easing your transition into the world
 
 
 
-## Prequest
+## Requirements
 This guide has been tested and used on AWS EC2 with an Ubuntu 22.04 image. The following tools are required:
-- Docker
-- Kubectl
-- Go
+- [Docker](https://docs.docker.com/install/)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [Go](https://docs.docker.com/install/)
 
 ## Content
 - How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?
