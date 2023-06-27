@@ -151,7 +151,7 @@ pip install flytekit && export PATH=$PATH:~/.local/bin
 # Step2: The flytesnacks repository provides a lot of useful examples.
 git clone https://github.com/flyteorg/flytesnacks && cd flytesnacks/cookbook
 
-# Step3: Before running the workflow, create the flytesnacks-development namespace. 
+# Step3: Before running the Hello World workflow, create the flytesnacks-development namespace. 
 # This is necessary because, by default (without creating a new project), task pods will run in the flytesnacks-development namespace.
 kubectl create namespace flytesnacks-development
 
