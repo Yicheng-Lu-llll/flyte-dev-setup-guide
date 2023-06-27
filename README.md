@@ -12,8 +12,7 @@ So, let's embark on this journey together, easing your transition into the world
 
 
 ## Prequest
-
-- This guide is used and tested on AWS EC2 with ubuntu 22.04 image.
+This guide has been tested and used on AWS EC2 with an Ubuntu 22.04 image. The following tools are required:
 - Docker
 - Kubectl
 - Go
