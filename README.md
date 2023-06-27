@@ -211,9 +211,37 @@ python3 core/flyte_basics/hello_world.py
 
 #### 3. Run workflow in sandbox
 Before running workflow in sandbox, You should make sure you can run workflow locally.
- 1. Build Flytekit image with your code
- 2. Push Flytekit image to the Flyte Cluster
- 3. Submit workflow to Flyte Cluster
+First, We Build Flytekit image with your code
+```Dockerfile
+FROM python:3.9-slim-buster
+USER root
+WORKDIR /root
+ENV PYTHONPATH /root
+RUN apt-get update && apt-get install build-essential -y
+RUN apt-get install git -y
+# RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@"visualization#egg=flytekitplugins-deck-standard&subdirectory=plugins/flytekit-deck-standard"
+RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@real-time-deck-support
+ENV FLYTE_INTERNAL_IMAGE "yichenglu/flytekit:MetricsExploration19"
+```
+
+```shell
+export PATH=$PATH:~/.local/bin
+export FLYTECTL_CONFIG=/root/.flyte/config-sandbox.yaml
+export KUBECONFIG=$KUBECONFIG:/root/.kube/config:/root/.flyte/k3s/k3s.yaml
+
+# git add .
+# git commit -s -m "develop"
+# git push
+
+
+export FLYTE_INTERNAL_IMAGE="localhost:30000/flytekit:visualization-continue23"
+docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f /home/ubuntu/flytekit/Dockerfile .
+docker push ${FLYTE_INTERNAL_IMAGE}
+pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote ./test.py  wf
+
+```
+Push Flytekit image to the Flyte Cluster
+Submit workflow to Flyte Cluster
 
 
 
