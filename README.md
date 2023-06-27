@@ -174,11 +174,21 @@ flytectl demo teardown
 
 ## How to set dev environment for flytekit?
 
-#### 1. Set local Flyte Cluster
-If you also change the code for flyteidl, flyteadmin, flyteplugins or flytepropeller, you can refer to `How to set dev environment for flyteidl, flyteadmin, flyteplugins, flytepropeller?` to build the backends.
-If not, we can start backends in one command.
+#### 1. Set up local Flyte Cluster
+If you are modifying the code for flyteidl, flyteadmin, flyteplugins, or flytepropeller, you can refer to How to set up a development environment for flyteidl, flyteadmin, flyteplugins, and flytepropeller? to build the backends.
+
+If not, we can start backends with a single command.
 ```shell
-# Step1: Create backends. It will set up a k3s cluster that runs Minio, Postgres pods and all Flyte components: flyteadmin, flyteplugins, flytepropeller, etc.
+# Step1: Install the latest version of Flytectl, a portable and lightweight command-line interface to work with Flyte.
+curl -sL https://ctl.flyte.org/install | bash
+# flyteorg/flytectl info checking GitHub for latest tag
+# flyteorg/flytectl info found version: 0.6.39 for v0.6.39/Linux/x86_64
+# flyteorg/flytectl info installed ./bin/flytectl
+
+# Step2: Export Flytectl path based on the previous log "flyteorg/flytectl info installed ./bin/flytectl"
+export PATH=$PATH:/home/ubuntu/bin # replace with your path
+
+# Step3: Create backends. This will set up a k3s cluster running Minio, Postgres pods, and all Flyte components: flyteadmin, flyteplugins, flytepropeller, etc.
 flytectl demo start
 # 👨‍💻 Flyte is ready! Flyte UI is available at http://localhost:30080/console 🚀 🚀 🎉 
 # ❇️ Run the following command to export demo environment variables for accessing flytectl
@@ -189,7 +199,7 @@ flytectl demo start
 
 #### 2. Run workflow locally
 ```shell
-# Step1: Build virtual environment to develop Flytekit. It will allow your local changes to take effect when the same Python interpreter runs import flytekit
+# Step1: Build a virtual environment for developing Flytekit. This will allow your local changes to take effect when the same Python interpreter runs `import flytekit`.
 git clone https://github.com/flyteorg/flytekit.git # replace with your own repo
 cd flytekit
 virtualenv ~/.virtualenvs/flytekit
@@ -198,11 +208,11 @@ make setup
 pip install -e .
 pip install gsutil awscli
 
-# Step2: Modify the source code for flytekit and run unit test and lint.
+# Step2: Modify the source code for flytekit, then run unit tests and lint.
 make lint
 make test
 
-# Step3: run an hello worldc sample to test locally
+# Step3: Run a hello world sample to test locally
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
 python3 core/flyte_basics/hello_world.py
@@ -211,10 +221,10 @@ python3 core/flyte_basics/hello_world.py
 ```
 
 #### 3. Run workflow in sandbox
-Before running workflow in sandbox, You should make sure you can run workflow locally.
-To run workflow in sandbox, We need to build the flyekit image. The following Dockerfile is the minum setting to run a task. 
-You can refer to how the [officail flitekit image](https://github.com/flyteorg/flytekit/blob/master/Dockerfile) is built to add more componnents(like plugins) if you need to.
-Please make the following Dockerfile under your flytekit folder.
+Before running a workflow in the sandbox, make sure you can run it locally.  
+To run the workflow in the sandbox, we need to build the flytekit image. The following Dockerfile is the minimum setting required to run a task.  
+You can refer to how the [officail flitekit image](https://github.com/flyteorg/flytekit/blob/master/Dockerfile) is built to add more components (like plugins) if needed.  
+Please create the following Dockerfile in your flytekit folder.  
 ```Dockerfile
 FROM python:3.9-slim-buster
 USER root
@@ -225,20 +235,21 @@ RUN apt-get install git -y
 RUN pip install -U git+https://github.com/Yicheng-Lu-llll/flytekit.git@visualization
 ENV FLYTE_INTERNAL_IMAGE "localhost:30000/flytekit:visualization"
 ```
-The following instautions tells how to build the image, push the image to Flyte Cluster and finally Submit workflow to Flyte Cluster.
+The instructions below explain how to build the image, push the image to the Flyte Cluster, and finally submit the workflow to the Flyte Cluster.
 ```shell
-# Step1: make sure to push your change to the remote repo
-# In flytekit folder
+# Step1: Ensure you have pushed your changes to the remote repo
+# In the flytekit folder
 git add . && git commit -s -m "develop" && git push
 
-# Step2: build the image
+# Step2: Build the image
+# In the flytekit folder
 export FLYTE_INTERNAL_IMAGE="localhost:30000/flytekit:visualization"
-docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f /home/ubuntu/flytekit/Dockerfile .
+docker build --no-cache -t  "${FLYTE_INTERNAL_IMAGE}" -f ./Dockerfile .
 
-# Step3: push the image to Flyte Cluster
+# Step3: Push the image to the Flyte Cluster
 docker push ${FLYTE_INTERNAL_IMAGE}
 
-# Step4: Submit a hello world workflow to Flyte Cluster
+# Step4: Submit a hello world workflow to the Flyte Cluster
 git clone https://github.com/flyteorg/flytesnacks
 cd flytesnacks/cookbook
 # Note create the flytesnacks-development namespace if not exists: 
@@ -246,13 +257,7 @@ cd flytesnacks/cookbook
 # kubectl create namespace flytesnacks-development
 pyflyte run --image ${FLYTE_INTERNAL_IMAGE} --remote core/flyte_basics/hello_world.py  my_wf
 # Go to http://localhost:30080/console/projects/flytesnacks/domains/development/executions/f5c17e1b5640c4336bf8 to see execution in the console.
-
-
 ```
-
-
-
-
 
 ## How to set dev environment for flyteconsole?
 
